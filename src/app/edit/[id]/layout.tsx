@@ -1,22 +1,22 @@
-import Image from "next/image"
-import { ReactNode } from "react"
+import { CardHeader } from "@/app/components/header"
 import Navigation from "@/app/components/navigation"
-import Header from "@/app/components/header"
+import { ReactNode } from "react"
+
 
 type Props = {
     children: ReactNode
 }
 
-const LayoutWithSidebar = ({ children }: Props) => {
+const EditPageLayout = ({ children }: Props) => {
     return (
         <>
-            <Header/>
+            <CardHeader />
             <main className="mt-[72px] lg:w-[calc(100vw_-_320px)] lg:ml-auto">
                 {children}
             </main>
-           <Navigation/>
+            <Navigation />
         </>
     )
 }
 
-export default LayoutWithSidebar;
+export default EditPageLayout;

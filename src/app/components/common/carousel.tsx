@@ -129,7 +129,7 @@ const Carousel = ({ children, gap = 0, ref }: Props) => {
 
     return (
         <Context.Provider value={contextValue}>
-            <div ref={containerRef} onScrollEnd={onScrollEnd} className="overflow-x-scroll" >
+            <div ref={containerRef} onScrollEnd={onScrollEnd} className="overflow-x-scroll no-scrollbar" >
                 <div ref={trackRef} style={{ width: containerWidth, gap }} className="flex transition-all" >
                     {children}
                 </div>

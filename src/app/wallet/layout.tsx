@@ -1,15 +1,15 @@
 import { ReactNode } from "react"
-import { ProfileHeader } from "../components/header"
+import { CardHeader } from "../components/header"
 import Navigation from "../components/navigation"
 
 type Props = {
     children: ReactNode
 }
 
-const ProfilePageLayout = ({ children }: Props) => {
+const WalletPageLayout = ({ children }: Props) => {
     return (
         <>
-            <ProfileHeader />
+            <CardHeader />
             <main className="mt-[72px] lg:w-[calc(100vw_-_320px)] lg:ml-auto">
                 {children}
             </main>
@@ -18,4 +18,4 @@ const ProfilePageLayout = ({ children }: Props) => {
     )
 }
 
-export default ProfilePageLayout;
+export default WalletPageLayout;

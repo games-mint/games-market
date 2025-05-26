@@ -1,25 +1,15 @@
-import Icon from "@/app/components/common/icon";
-import Text from "@/app/components/common/text";
-import Title from "@/app/components/common/title"
-import Link from "next/link";
-import Image from "next/image";
 import Game from "@/app/components/common/game";
 import { Tab, TabGroup } from "@/app/components/common/tabs";
 
-const GamesPage = () => {
+const AppsPage = () => {
     return (
         <>
             <section className="container mx-auto px-4 pt-10">
                 <div className="flex flex-col gap-8">
                     <div className="flex flex-col gap-6">
                         <h3 className="font-medium text-xl lg:text-2xl" >
-                            All games
+                            All apps
                         </h3>
-                        <TabGroup>
-                            <Tab>All games</Tab>
-                            <Tab active icon="mobile">Mobile games</Tab>
-                            <Tab icon="monitor">PC/Console games</Tab>
-                        </TabGroup>
 
                         <div className="grid grid-cols-[repeat(auto-fill,_minmax(160px,_1fr))] lg:grid-cols-[repeat(auto-fill,_minmax(220px,_1fr))] gap-4">
                             <Game name="DOTA 2" image="/dota-2.png" />
@@ -35,4 +25,4 @@ const GamesPage = () => {
     )
 }
 
-export default GamesPage;
+export default AppsPage;
