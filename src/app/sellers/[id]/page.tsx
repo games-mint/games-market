@@ -8,6 +8,7 @@ import Featured from '@/app/components/featured';
 import OfferCard from '@/app/components/offerCard';
 import Image from 'next/image';
 
+
 const SellerPage = () => {
 
     return (
