@@ -1,7 +1,6 @@
 
 import Card from '@/app/components/common/card';
 import Dropdown from '@/app/components/common/dropdown';
-import Game from '@/app/components/common/game';
 import Icon from '@/app/components/common/icon';
 import Text from '@/app/components/common/text';
 import Title from '@/app/components/common/title';

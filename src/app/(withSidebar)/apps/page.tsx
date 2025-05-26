@@ -1,5 +1,4 @@
 import Game from "@/app/components/common/game";
-import { Tab, TabGroup } from "@/app/components/common/tabs";
 
 const AppsPage = () => {
     return (

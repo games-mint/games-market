@@ -1,5 +1,5 @@
 'use client';
-import { createContext, createRef, ReactNode, RefObject, useCallback, useContext, useEffect, useImperativeHandle, useMemo, useRef, useState } from "react"
+import { createContext, ReactNode, RefObject, useCallback, useContext, useEffect, useImperativeHandle, useMemo, useRef, useState } from "react"
 import { uniqueId } from 'lodash';
 
 type Props = {
@@ -18,8 +18,7 @@ const Carousel = ({ children, gap = 0, ref }: Props) => {
     const trackRef = useRef<HTMLDivElement>(null);
     const [activeId, setActiveId] = useState<string | null>(null);
     const [elements, setElements] = useState<{ id: string, width: number }[]>([]);
-    const [startScrollPos, setStartScrollPos] = useState(0);
-
+    
     const next = () => {
         if (containerRef.current === null || trackRef.current === null) return;
 

@@ -1,8 +1,3 @@
-import Icon from "@/app/components/common/icon";
-import Text from "@/app/components/common/text";
-import Title from "@/app/components/common/title"
-import Link from "next/link";
-import Image from "next/image";
 import Game from "@/app/components/common/game";
 import { Tab, TabGroup } from "@/app/components/common/tabs";
 

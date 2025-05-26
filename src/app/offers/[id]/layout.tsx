@@ -1,9 +1,6 @@
-import Icon from "@/app/components/common/icon"
-import Text from "@/app/components/common/text"
 import { CardHeader } from "@/app/components/header"
 import Navigation from "@/app/components/navigation"
-import Image from "next/image"
-import Link from "next/link"
+
 import { ReactNode } from "react"
 
 type Props = {

@@ -1,6 +1,4 @@
 import Dropdown from "@/app/components/common/dropdown";
-import Icon from "@/app/components/common/icon";
-import Text from "@/app/components/common/text";
 import Featured from "@/app/components/featured";
 import OfferCard from "@/app/components/offerCard";
 

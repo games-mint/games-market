@@ -2,7 +2,6 @@
 import { useRef } from "react";
 
 import Carousel, { CarouselElement, CarouselRef } from "@/app/components/common/carousel";
-import Text from '@/app/components/common/text';
 import Icon from "@/app/components/common/icon";
 import OfferCard from "./offerCard";
 

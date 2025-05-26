@@ -21,8 +21,8 @@ const OfferPage = () => {
                             <h3 className="text-xl font-medium lg:text-4xl"  >Dota 2 Account with skins</h3>
                             <p className="text-sm lg:text-base">
                                 Easily top up your in-game currency with our fast and secure top-up service.
-                                Whether you're looking to unlock premium items, power up your character,
-                                or get ahead in the game, we've got you covered. Enjoy instant delivery,
+                                Whether you are looking to unlock premium items, power up your character,
+                                or get ahead in the game, we have got you covered. Enjoy instant delivery,
                                 multiple payment options, and a hassle-free experience that keeps
                                 you focused on what matters most—winning the game!
                             </p>

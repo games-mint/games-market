@@ -1,4 +1,3 @@
-import Image from "next/image"
 import { ReactNode } from "react"
 import Navigation from "@/app/components/navigation"
 import Header from "@/app/components/header"

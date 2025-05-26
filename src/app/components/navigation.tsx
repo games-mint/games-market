@@ -4,7 +4,7 @@ import Icon from "./common/icon"
 import { Icons } from "./common/icon/types"
 import Image from "next/image"
 import Button from "./common/button"
-import { useParams, usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 
 const Navigation = () => {
