@@ -23,4 +23,5 @@ export type Icons =
     'flag' |
     'clock' |
     'export' |
-    'import';
+    'import'
+    | 'google';

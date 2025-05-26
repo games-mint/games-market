@@ -11,6 +11,7 @@ import FilterSearchIcon from "./icons/filter-search"
 import FlagIcon from "./icons/flag"
 import FlashIcon from "./icons/flash"
 import GameIcon from "./icons/game"
+import GoogleIcon from "./icons/google"
 import ImportIcon from "./icons/import"
 import LayerIcon from "./icons/layer"
 import LikeTagIcon from "./icons/like-tag"
@@ -81,6 +82,8 @@ const Icon = ({ icon, className }: Props) => {
             return <ArrowSquareDownIcon className={className} />
         case 'arrow-sqare-up':
             return <ArrowSquareUpIcon className={className} />
+        case 'google':
+            return <GoogleIcon className={className} />
     }
 }
 

@@ -16,15 +16,15 @@ const DealPage = () => {
                         <div className="flex flex-col gap-4">
                             <div className="flex items-center gap-2">
                                 <Icon icon="flag" className="w-6 h-6 text-violet-800" />
-                                <p className="font-medium">Products delivered to user</p>
+                                <p className="text-base font-medium">Products delivered to user</p>
                             </div>
                             <div className="flex items-center gap-2">
                                 <Icon icon="clock" className="w-6 h-6 text-slate-300" />
-                                <p className="font-medium text-slate-400">Waiting for delivery</p>
+                                <p className="text-base text-slate-400">Waiting for delivery</p>
                             </div>
                             <div className="flex items-center gap-2">
                                 <Icon icon="receipt" className="w-6 h-6 text-slate-300" />
-                                <p className="font-medium text-slate-400">User paid for a products</p>
+                                <p className="text-base text-slate-400">User paid for a products</p>
                             </div>
                         </div>
                     </Card>

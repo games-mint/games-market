@@ -5,6 +5,7 @@ import Title from '../components/common/title';
 import Card from '../components/common/card';
 import OfferCard from '../components/offerCard';
 import Dropdown from '../components/common/dropdown';
+import Link from 'next/link';
 
 const ProfilePage = () => {
     return (
@@ -34,7 +35,7 @@ const ProfilePage = () => {
                         title='Your deals'
                     >
                         <div className='grid grid-cols-[repeat(auto-fill,_minmax(170px,_1fr))] gap-4'>
-                            <div className='px-2 py-3 flex flex-col gap-4 bg-white rounded-2xl'>
+                            <Link href="/deals/1" className='px-2 py-3 flex flex-col gap-4 bg-white rounded-2xl'>
                                 <h5 className='font-medium text-sm'>Top up Roblox coins</h5>
                                 <p className='text-slate-400 text-xs'>Waiting for delivery</p>
                                 <div className='flex items-center gap-2'>
@@ -47,8 +48,8 @@ const ProfilePage = () => {
                                     <span className='text-xl'>60</span>
                                     <Icon className='w-4 h-4' icon="flash" />
                                 </div>
-                            </div>
-                            <div className='px-2 py-3 flex flex-col gap-4 bg-white rounded-2xl'>
+                            </Link>
+                            <Link href="/deals/1" className='px-2 py-3 flex flex-col gap-4 bg-white rounded-2xl'>
                                 <h5 className='font-medium text-sm'>Top up Roblox coins</h5>
                                 <p className='text-slate-400 text-xs'>Waiting for delivery</p>
                                 <div className='flex items-center gap-2'>
@@ -61,7 +62,7 @@ const ProfilePage = () => {
                                     <span className='text-xl'>60</span>
                                     <Icon className='w-4 h-4' icon="flash" />
                                 </div>
-                            </div>
+                            </Link>
                         </div>
                     </Card>
                 </section>
