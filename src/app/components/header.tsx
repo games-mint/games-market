@@ -11,7 +11,7 @@ const Header = () => {
             <div className='container px-4 mx-auto '>
                 <div className="flex justify-between items-center gap-4 py-3">
                     <input className="w-full px-6 py-3 rounded-full text-base max-w-[600px] placeholder:text-slate-500 text-slate-900 bg-slate-100 outline-none" placeholder="Search games or apps" />
-                    <button className="w-12 h-12 bg-slate-50 rounded-full flex-shrink-0 flex items-center justify-center">
+                    <button className="w-12 h-12 bg-slate-100 rounded-full flex-shrink-0 flex items-center justify-center">
                         <Link href="/profile" className="relative w-8 h-8 rounded-full overflow-clip">
                             <Image className="object-fill" src="/profile-image.png" fill alt="profile image" />
                         </Link>
@@ -21,6 +21,23 @@ const Header = () => {
         </header>
     )
 }
+
+
+export const NonAuthUserHeader = () => {
+    return (
+        <header className="fixed top-0 left-0 right-0 w-full bg-white/60 backdrop-blur-md z-20 lg:right-0 lg:w-[calc(100vw_-_320px)] lg:ml-auto">
+            <div className='container px-4 mx-auto '>
+                <div className="flex justify-between items-center gap-4 py-3">
+                    <input className="w-full px-6 py-3 rounded-full text-base max-w-[600px] placeholder:text-slate-500 text-slate-900 bg-slate-100 outline-none" placeholder="Search games or apps" />
+                    <Link href="/login" className="relative whitespace-nowrap px-6 py-3 text-base font-medium bg-violet-600 text-white rounded-full">
+                        Sign in
+                    </Link>
+                </div>
+            </div>
+        </header>
+    )
+}
+
 
 
 export const CardHeader = () => {
@@ -54,7 +71,7 @@ export const ProfileHeader = () => {
     const goBack = () => {
         router.back();
     }
-    
+
     return (
         <header className="fixed top-0 left-0 right-0 w-full bg-white/60 backdrop-blur-md z-20 lg:right-0 lg:w-[calc(100vw_-_320px)] lg:ml-auto">
             <div className='container px-4 mx-auto '>

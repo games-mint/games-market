@@ -7,13 +7,16 @@ type Props = {
     icon?: Icons,
     type?: 'primary' | 'secondary' | 'alt',
     className?: string,
+    buttonType?: 'button' | 'submit',
+    disabled?: boolean,
+    onClick?:() => void,
 }
 
 
-const Button = ({ children, icon, type = "primary", className }: Props) => {
+const Button = ({ children, icon, type = "primary", buttonType = "button", disabled, className, onClick }: Props) => {
     return (
-        <button className={`px-6 gap-2 py-3 text-base flex items-center justify-between font-medium rounded-full ${className}
-        ${type === "primary" ? "bg-violet-600 text-white" : type === "secondary" ? "bg-slate-200 text-slate-700" : "bg-white text-violet-600"}
+        <button onClick={onClick} disabled={disabled} type={buttonType} className={`px-6 gap-2 py-3 text-base flex items-center justify-between font-medium rounded-full ${className}
+        ${type === "primary" ? "bg-violet-600 text-white disabled:bg-violet-200" : type === "secondary" ? "bg-slate-200 text-slate-700" : "bg-white text-violet-600"}
         `}>
             {children}
             {icon ? <Icon className="w-6 h-6" icon={icon} /> : null}

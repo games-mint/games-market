@@ -6,18 +6,37 @@ import Card from '../components/common/card';
 import OfferCard from '../components/offerCard';
 import Dropdown from '../components/common/dropdown';
 import Link from 'next/link';
+import { createClient } from '@/utils/supabase/server';
+import { db } from '@/db';
+import { posts, profiles } from '@/db/schema';
+import { eq } from 'drizzle-orm';
 
-const ProfilePage = () => {
+const ProfilePage = async () => {
+    const supabase = await createClient()
+
+    const { data } = await supabase.auth.getUser()
+
+    if (data.user === null)
+        return null;
+
+    const users = await db.select().from(profiles).where(eq(profiles.id, data.user.id));
+    const userData = users[0];
+    const offers = await db.select().from(posts).where(eq(posts.author_id, userData.id))
+
     return (
         <>
             <section className='container mx-auto px-4 pt-10'>
                 <div className="flex gap-2 items-center">
-                    <div className="relative w-16 h-16 rounded-full overflow-clip">
-                        <Image className="object-fill" src="/profile-image.png" fill alt="profile image" />
-                    </div>
+                    {userData?.avatar_url ? (
+                        <div className="relative w-16 h-16 rounded-full overflow-clip">
+                            <Image className="object-fill" src={userData?.avatar_url} fill alt="profile image" />
+                        </div>
+                    ) : (
+                        <div className="relative w-16 h-16 rounded-full overflow-clip bg-slate-300" />
+                    )}
                     <div className="flex flex-col gap-2">
-                        <Title size="h3" className="text-slate-700">@Green_Dragon_3</Title>
-                        <Text size="sm" className="text-slate-500">from July 2025</Text>
+                        <Title size="h3" className="text-slate-700">{userData.name}</Title>
+                        <Text size="sm" className="text-slate-500">from {userData.created_at.toDateString()}</Text>
                     </div>
                 </div>
             </section>
@@ -166,17 +185,14 @@ const ProfilePage = () => {
                     </h3>
                     <div className="w-full overflow-x-scroll no-scrollbar">
                         <div className="flex items-center gap-4">
-                            <Dropdown title='Sort by'/>
+                            <Dropdown title='Sort by' />
                         </div>
                     </div>
 
                     <div className="grid grid-cols-[repeat(auto-fill,_minmax(190px,_1fr))] lg:grid-cols-[repeat(auto-fill,_minmax(220px,_1fr))] gap-4 mb-32">
-                        <OfferCard />
-                        <OfferCard />
-                        <OfferCard />
-                        <OfferCard />
-                        <OfferCard />
-                        <OfferCard />
+                        {offers.map(({ id, image_url, title, description, price }) => (
+                            <OfferCard key={id} id={id} link={`/edit/${id}`} image={image_url} title={title} description={description} price={price} authorName={userData.name} authorProfileImage={userData.avatar_url} />
+                        ))}
                     </div>
                 </div>
             </section>

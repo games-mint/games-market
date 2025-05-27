@@ -6,24 +6,43 @@ import Text from '@/app/components/common/text';
 import Title from '@/app/components/common/title';
 import Featured from '@/app/components/featured';
 import OfferCard from '@/app/components/offerCard';
+import { db } from '@/db';
+import { posts, profiles } from '@/db/schema';
+import { eq } from 'drizzle-orm';
 import Image from 'next/image';
 
 
-const SellerPage = () => {
+const SellerPage = async ({
+    params,
+}: {
+    params: Promise<{ id: string }>
+}) => {
+
+    const { id } = await params;
+
+    const users = await db.select().from(profiles).where(eq(profiles.id, id));
+    const user = users[0];
+    const offers = await db.select().from(posts).where(eq(posts.author_id, id))
 
     return (
         <>
             <section className="container px-4 mx-auto pt-10">
                 <div className="flex items-center gap-4">
-                    <div className="relative w-16 h-16 rounded-full overflow-clip">
-                        <Image className="object-fill" src="/profile-image.png" fill alt="profile image" />
-                    </div>
+                    {user.avatar_url ?
+                        (
+                            <div className="relative w-16 h-16 rounded-full overflow-clip">
+                                <Image className="object-fill" src="/profile-image.png" fill alt="profile image" />
+                            </div>
+                        ) :
+                        (
+                            <div className="relative w-16 h-16 rounded-full overflow-clip bg-slate-300" />
+                        )}
                     <div className='flex flex-col gap-2'>
                         <Title className='text-slate-700' size='h3'>
-                            @Green_Dragon_3
+                            {user.name}
                         </Title>
                         <Text className='text-slate-500'>
-                            from July 2025
+                            from {user.created_at.toDateString()}
                         </Text>
                     </div>
                 </div>
@@ -115,12 +134,9 @@ const SellerPage = () => {
                     </div>
 
                     <div className="grid grid-cols-[repeat(auto-fill,_minmax(190px,_1fr))] lg:grid-cols-[repeat(auto-fill,_minmax(220px,_1fr))] gap-4 mb-32">
-                        <OfferCard />
-                        <OfferCard />
-                        <OfferCard />
-                        <OfferCard />
-                        <OfferCard />
-                        <OfferCard />
+                        {offers.map(({ id, image_url, title, description, price }) => (
+                            <OfferCard key={id} id={id} image={image_url} title={title} description={description} price={price} authorName={user.name} authorProfileImage={user.avatar_url} />
+                        ))}
                     </div>
                 </div>
             </section>

@@ -7,11 +7,11 @@ import Button from "./common/button"
 import { usePathname } from "next/navigation";
 
 
-const Navigation = () => {
+const Navigation = ({ authorised = false }: { authorised?: boolean }) => {
     const pathname = usePathname();
 
     const activeGames = pathname.match('/games') !== null;
-    const activeApps = pathname.match('/apps')  !== null;
+    const activeApps = pathname.match('/apps') !== null;
 
 
     return (
@@ -25,10 +25,10 @@ const Navigation = () => {
                         </Link>
                     </div>
 
-                    <div className="w-[50%] lg:flex flex-col gap-6 lg:order-3 lg:w-full">
+                    <div className={`${authorised ? "w-[50%]" : "w-[60%]"} lg:flex flex-col gap-6 lg:order-3 lg:w-full`}>
                         <span className="hidden lg:block text-sm font-medium uppercase tracking-[0.15rem] px-3">NAVIGATION</span>
                         <div className="flex items-center justify-between lg:flex-col lg:gap-6">
-                            <NavigationItem  title="Explore" icon="category" link="/" />
+                            <NavigationItem title="Explore" icon="category" link="/" />
                             <NavigationItem active={activeGames} title="Games" icon="game" link="/games" />
                             <NavigationItem active={activeApps} title="Apps" icon="layer" link="/apps" />
                         </div>
@@ -42,25 +42,28 @@ const Navigation = () => {
                         </div>
                     </div> */}
 
-                    <div className="w-[25%] lg:order-2 lg:w-full lg:mb-8">
+                    <div className={`${authorised ? "w-[25%]" : "w-[40%]"} lg:order-2 lg:w-full lg:mb-8`}>
                         <Link href="/edit/new" className="w-fit mx-auto flex items-center justify-center px-6 py-3 flex-shrink-0 bg-violet-100 text-violet-800 rounded-full lg:w-full lg:justify-between">
                             <span className="hidden lg:block ">Sell</span>
                             <Icon className="w-6 h-6 " icon="add-square" />
                         </Link>
                     </div>
 
-                    <div className="w-[30%] lg:order-5 lg:w-full lg:mt-auto">
-                        <Link href="/wallet" className="w-fit mx-auto flex items-center justify-center px-6 py-3 flex-shrink-0 bg-gradient-to-b from-violet-600 to-fuchsia-500 text-white rounded-full lg:flex-col lg:gap-4 lg:rounded-2xl lg:w-full lg:p-6" >
-                            <span className="hidden lg:block text-base font-medium">Your balance</span>
-                            <div className="flex items-center gap-2">
-                                <span className="text-base font-medium lg:text-4xl" >324</span>
-                                <Icon className="w-6 h-6 " icon="flash" />
-                            </div>
-                            <Button className="max-lg:hidden  w-full" type="alt" icon="add-square" >
-                                Top up balance
-                            </Button>
-                        </Link>
-                    </div>
+                    {authorised
+                        ? <div className="w-[30%] lg:order-5 lg:w-full lg:mt-auto">
+                            <Link href="/wallet" className="w-fit mx-auto flex items-center justify-center px-6 py-3 flex-shrink-0 bg-gradient-to-b from-violet-600 to-fuchsia-500 text-white rounded-full lg:flex-col lg:gap-4 lg:rounded-2xl lg:w-full lg:p-6" >
+                                <span className="hidden lg:block text-base font-medium">Your balance</span>
+                                <div className="flex items-center gap-2">
+                                    <span className="text-base font-medium lg:text-4xl" >324</span>
+                                    <Icon className="w-6 h-6 " icon="flash" />
+                                </div>
+                                <Button className="max-lg:hidden  w-full" type="alt" icon="add-square" >
+                                    Top up balance
+                                </Button>
+                            </Link>
+                        </div>
+                        : <div className="hidden lg:block order-5 w-full mt-auto" />
+                    }
                 </div>
             </div>
         </nav>

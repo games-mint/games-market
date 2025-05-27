@@ -5,6 +5,7 @@ import { ArrowLeftIcon, ArrowRightIcon } from "./icons/arrows"
 import BagIcon from "./icons/bag"
 import CategoryIcon from "./icons/category"
 import ClockIcon from "./icons/clock"
+import CloseCircleIcon from "./icons/close-circle"
 import ExportIcon from "./icons/export"
 import EyeIcon from "./icons/eye"
 import FilterSearchIcon from "./icons/filter-search"
@@ -21,6 +22,7 @@ import MonitorIcon from "./icons/monitor"
 import ReceiptIcon from "./icons/receipt"
 import SettingsIcon from "./icons/settings"
 import StarIcon from "./icons/star"
+import WarningIcon from "./icons/warning"
 import { Icons } from "./types"
 
 type Props = {
@@ -84,6 +86,10 @@ const Icon = ({ icon, className }: Props) => {
             return <ArrowSquareUpIcon className={className} />
         case 'google':
             return <GoogleIcon className={className} />
+        case 'warning':
+            return <WarningIcon className={className} />
+        case 'close-circle':
+            return <CloseCircleIcon className={className} />
     }
 }
 

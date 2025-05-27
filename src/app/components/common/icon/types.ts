@@ -24,4 +24,7 @@ export type Icons =
     'clock' |
     'export' |
     'import'
-    | 'google';
+    | 'google'
+    | 'warning'
+    | 'close-circle'
+    ;

@@ -1,0 +1,34 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1748298979431,
+      "tag": "0000_third_outlaw_kid",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1748333231410,
+      "tag": "0001_shocking_puck",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1748335533239,
+      "tag": "0002_polite_baron_zemo",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1748336762286,
+      "tag": "0003_acoustic_beyonder",
+      "breakpoints": true
+    }
+  ]
+}
