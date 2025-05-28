@@ -223,7 +223,7 @@ const ProfilePage = ({ userData, offers, deals, orders }: Props) => {
                     </div>
                 </section>
             </main>
-            <Navigation />
+            <Navigation authorised />
         </>
     )
 }

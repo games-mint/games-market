@@ -23,7 +23,7 @@ const WalletPageLayout = async ({ children }: Props) => {
             <main className="mt-[72px] lg:w-[calc(100vw_-_320px)] lg:ml-auto">
                 {children}
             </main>
-            <Navigation />
+            <Navigation authorised />
         </>
     )
 }
