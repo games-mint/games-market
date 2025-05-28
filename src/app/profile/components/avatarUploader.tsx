@@ -1,6 +1,6 @@
 import Icon from "@/app/components/common/icon"
 import Image from 'next/image';
-import { useRef, useState } from "react";
+import { useRef } from "react";
 
 type Props = {
     url: string | null,

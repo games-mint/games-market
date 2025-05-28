@@ -1,5 +1,5 @@
 import Icon from "@/app/components/common/icon"
-import { useRef, useState } from "react";
+import { useRef } from "react";
 
 type Props = {
     url?: string,

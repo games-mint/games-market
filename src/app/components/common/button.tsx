@@ -1,3 +1,4 @@
+'use client'
 import { ReactNode } from "react"
 import { Icons } from "./icon/types"
 import Icon from "./icon"

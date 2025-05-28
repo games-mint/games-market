@@ -13,7 +13,7 @@ const Header = () => {
                     <input className="w-full px-6 py-3 rounded-full text-base max-w-[600px] placeholder:text-slate-500 text-slate-900 bg-slate-100 outline-none" placeholder="Search games or apps" />
                     <button className="w-12 h-12 bg-slate-100 rounded-full flex-shrink-0 flex items-center justify-center">
                         <Link href="/profile" className="relative w-8 h-8 rounded-full overflow-clip">
-                            <Image className="object-fill" src="/profile-image.png" fill alt="profile image" />
+                            <Image className="object-cover" src="/profile-image.png" fill alt="profile image" />
                         </Link>
                     </button>
                 </div>

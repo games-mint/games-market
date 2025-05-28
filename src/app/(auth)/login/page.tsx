@@ -1,6 +1,5 @@
 'use client'
 import Button from "@/app/components/common/button"
-import Icon from "@/app/components/common/icon"
 import Input from "@/app/components/common/input"
 import { zodResolver } from "@hookform/resolvers/zod"
 import Link from "next/link"
@@ -9,9 +8,11 @@ import { Controller, useForm } from "react-hook-form"
 import loginSchema from "./schema"
 import login from "../actions/login"
 import { isEmpty } from "lodash"
+import ServerError from "@/app/components/common/serverError"
+import { LoginData } from "../actions/types"
 
 const LoginPage = () => {
-    const [serverError, setServerError] = useState("");
+    const [serverError, setServerError] = useState<string | null>(null);
 
     const {
         handleSubmit,
@@ -29,9 +30,9 @@ const LoginPage = () => {
     })
 
 
-    const startLogin = async (data: any) => {
+    const startLogin = async (data: LoginData) => {
         const { serverError, validationError } = await login(data);
-        if (validationError)
+        if (validationError !== null)
             validationError.forEach(err => {
                 setError(err.field, { type: err.code })
             })
@@ -53,7 +54,7 @@ const LoginPage = () => {
                     setServerError("Ошибка на сервере");
             }
         } else {
-            setServerError("");
+            setServerError(null);
         }
     }
 
@@ -63,17 +64,9 @@ const LoginPage = () => {
 
     return (
         <>
-            {serverError !== ""
+            {serverError !== null
                 ?
-                <div className="fixed min-w-[250px]  mx-auto right-4 top-4 flex gap-4 justify-between items-center px-6 py-3 bg-red-200 rounded-xl">
-                    <div className="flex items-center gap-2">
-                        <Icon icon="warning" className="text-red-600 w-5 h-5 flex-shrink-0" />
-                        <span className="text-base text-red-600">{serverError}</span>
-                    </div>
-                    <button className="flex-shrink-0" onClick={() => setServerError("")}>
-                        <Icon icon="close-circle" className="w-5 h-5 text-slate-500" />
-                    </button>
-                </div>
+                <ServerError serverError={serverError} onClose={() => setServerError(null)} />
                 : null
             }
 
@@ -84,7 +77,7 @@ const LoginPage = () => {
                         <Controller
                             control={control}
                             name="email"
-                            render={({ field, fieldState: { error, isValidating } }) =>
+                            render={({ field, fieldState: { error } }) =>
                                 <Input error={error !== undefined} errorStr={error?.type === "too_small" ? "Field is required" : error?.type === "invalid_string" ? "Email is not valid" : undefined} className="w-full" placeholder="Email" {...field} />
                             }
                         />
@@ -92,7 +85,7 @@ const LoginPage = () => {
                         <Controller
                             control={control}
                             name="password"
-                            render={({ field, fieldState: { error, isValidating, } }) =>
+                            render={({ field, fieldState: { error } }) =>
                                 <Input type="password" error={error !== undefined} errorStr={error?.type === "too_small" ? "Field is required " : ""} className="w-full" placeholder="Password" {...field} />
                             }
                         />

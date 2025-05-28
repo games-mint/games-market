@@ -5,7 +5,7 @@ import { deals, posts, profiles } from '@/db/schema';
 import { eq } from 'drizzle-orm';
 import ProfilePage from './profilePage';
 
-export default async function () {
+export default async function Page () {
     const supabase = await createClient()
 
     const { data } = await supabase.auth.getUser()
@@ -15,7 +15,7 @@ export default async function () {
 
     const userData = (await db.select().from(profiles).where(eq(profiles.id, data.user.id)))[0];
 
-    const offers = await db.select().from(posts).where(eq(posts.authorId, userData.id))
+    const offers = (await db.select().from(posts).where(eq(posts.authorId, userData.id)).leftJoin(profiles, eq(profiles.id, posts.authorId))).map(el => ({ offer: el.posts!, seller: el.profiles! }))
 
     const dealsDataFull = await db.select().from(deals).leftJoin(posts, eq(posts.id, deals.postId)).leftJoin(profiles, eq(profiles.id, deals.sellerId)).where(eq(deals.sellerId, userData.id));
 

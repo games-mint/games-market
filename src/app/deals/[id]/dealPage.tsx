@@ -3,7 +3,6 @@ import Icon from "@/app/components/common/icon"
 import TextArea from "@/app/components/common/textarea";
 import Card from "@/app/components/common/card";
 import { DealStatus, FullDealDetails } from "@/common/types";
-import { StatusDict } from "@/app/profile/profilePage";
 import { Icons } from "@/app/components/common/icon/types";
 
 
@@ -40,7 +39,7 @@ const DealPage = ({ deal }: Props) => {
 
                             <div className="flex items-center gap-2">
                                 <Icon icon="receipt" className={`w-6 h-6 ${deal.deal.status === "completed" ? "text-violet-800" : "text-slate-300"}`} />
-                                <p className={`text-base font-medium ${deal.deal.status === "completed" ? "text-slate-900" : "text-slate-400"}`}>Deal is completed"</p>
+                                <p className={`text-base font-medium ${deal.deal.status === "completed" ? "text-slate-900" : "text-slate-400"}`}>Deal is completed</p>
                             </div>
                         </div>
                     </Card>

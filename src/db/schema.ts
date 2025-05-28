@@ -1,5 +1,5 @@
 
-import { relations, sql } from "drizzle-orm";
+import { sql } from "drizzle-orm";
 import { integer, pgEnum, pgSchema, pgTable, serial, text, timestamp, uuid, varchar } from "drizzle-orm/pg-core";
 
 const authSchema = pgSchema("auth");

@@ -8,6 +8,7 @@ import Text from "@/app/components/common/text";
 import { useState } from "react";
 import { purchaseOffer } from "@/app/actions/deals";
 import { Offer, Profile } from "@/common/types";
+import ServerError from "@/app/components/common/serverError";
 
 
 type Props = {
@@ -38,17 +39,10 @@ const OfferPage = ({ offer, seller }: Props) => {
         <>
             {serverError !== null
                 ?
-                <div className="fixed min-w-[250px]  mx-auto right-4 top-16 flex gap-4 justify-between items-center px-6 py-3 bg-red-200 rounded-xl">
-                    <div className="flex items-center gap-2">
-                        <Icon icon="warning" className="text-red-600 w-5 h-5 flex-shrink-0" />
-                        <span className="text-base text-red-600">{serverError}</span>
-                    </div>
-                    <button type="button" className="flex-shrink-0" onClick={() => setServerError(null)}>
-                        <Icon icon="close-circle" className="w-5 h-5 text-slate-500" />
-                    </button>
-                </div>
+                <ServerError serverError={serverError} onClose={() => setServerError(null)} />
                 : null
             }
+
             <div className="sm:container sm:px-4 sm:mx-auto lg:flex justify-start gap-4">
 
                 <div className="lg:max-w-[660px] lg:w-[70%]">
@@ -72,7 +66,7 @@ const OfferPage = ({ offer, seller }: Props) => {
                             <Link href={`/sellers/${seller.id}`} className="flex gap-3 items-center">
                                 {seller.avatarUrl ? (
                                     <div className="relative w-16 h-16 rounded-full overflow-clip">
-                                        <Image className="object-fill" src={seller.avatarUrl} fill alt="profile image" />
+                                        <Image className="object-cover" src={seller.avatarUrl} fill alt="profile image" />
                                     </div>
                                 ) : (
                                     <div className="relative w-16 h-16 rounded-full overflow-clip bg-slate-300" />

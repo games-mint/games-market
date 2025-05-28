@@ -5,7 +5,7 @@ import EditPage from "./editPage"
 import { posts } from "@/db/schema";
 import { eq } from "drizzle-orm";
 
-export default async function ({
+export default async function Page ({
     params,
 }: {
     params: Promise<{ id: string }>

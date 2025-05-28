@@ -1,12 +1,11 @@
 import Game from "@/app/components/common/game";
-import { Tab, TabGroup } from "@/app/components/common/tabs";
 import { db } from "@/db";
 import { products } from "@/db/schema";
 import { eq } from "drizzle-orm";
 
 const GamesPage = async () => {
 
-    const games = await db.select({ id: products.id, name: products.name, image_url: products.imageUrl }).from(products).where(eq(products.category, 'games'));
+    const games = await db.select().from(products).where(eq(products.category, 'games'));
 
     return (
         <>
@@ -23,7 +22,7 @@ const GamesPage = async () => {
                         </TabGroup> */}
 
                         <div className="grid grid-cols-[repeat(auto-fill,_minmax(160px,_1fr))] lg:grid-cols-[repeat(auto-fill,_minmax(220px,_1fr))] gap-4">
-                            {games.map(({ name, image_url, id }) => <Game id={id} name={name} image={image_url} key={id} />)}
+                            {games.map(({ name, imageUrl, id }) => <Game id={id} name={name} image={imageUrl} key={id} />)}
                         </div>
                     </div>
                 </div>

@@ -22,7 +22,7 @@ const SellerPage = async ({
 
     const users = await db.select().from(profiles).where(eq(profiles.id, id));
     const user = users[0];
-    const offers = await db.select().from(posts).where(eq(posts.authorId, id))
+    const offers = (await db.select().from(posts).where(eq(posts.authorId, id)).leftJoin(profiles, eq(profiles.id, posts.authorId))).map(el => ({ offer: el.posts!, seller: el.profiles! }))
 
     return (
         <>
@@ -31,7 +31,7 @@ const SellerPage = async ({
                     {user.avatarUrl ?
                         (
                             <div className="relative w-16 h-16 rounded-full overflow-clip">
-                                <Image className="object-fill" src="/profile-image.png" fill alt="profile image" />
+                                <Image className="object-cover" src="/profile-image.png" fill alt="profile image" />
                             </div>
                         ) :
                         (
@@ -134,8 +134,8 @@ const SellerPage = async ({
                     </div>
 
                     <div className="grid grid-cols-[repeat(auto-fill,_minmax(190px,_1fr))] lg:grid-cols-[repeat(auto-fill,_minmax(220px,_1fr))] gap-4 mb-32">
-                        {offers.map(({ id, imageUrl: image_url, title, description, price }) => (
-                            <OfferCard key={id} id={id} image={image_url} title={title} description={description} price={price} authorName={user.name} authorProfileImage={user.avatarUrl} />
+                        {offers.map(({ offer, seller }) => (
+                            <OfferCard key={offer.id} offer={offer} seller={seller} />
                         ))}
                     </div>
                 </div>

@@ -1,7 +1,6 @@
 'use client'
 
 import Button from "@/app/components/common/button"
-import Icon from "@/app/components/common/icon"
 import Input from "@/app/components/common/input"
 import { zodResolver } from "@hookform/resolvers/zod"
 import Link from "next/link"
@@ -10,6 +9,8 @@ import { Controller, useForm } from "react-hook-form"
 import { signUpSchema } from "./schema"
 import { isEmpty } from "lodash"
 import { signup } from "../actions/signup"
+import ServerError from "@/app/components/common/serverError"
+import { SignUpData } from "../actions/types"
 
 const SignUpPage = () => {
     const [serverError, setServerError] = useState<string | null>(null);
@@ -30,10 +31,10 @@ const SignUpPage = () => {
         }
     })
 
-    const startSignUp = async (data: any) => {
+    const startSignUp = async (data: SignUpData) => {
         const { serverError, validationError } = await signup(data);
 
-        if (validationError)
+        if (validationError !== null)
             validationError.forEach(err => {
                 setError(err.field, { type: err.code })
             })
@@ -66,15 +67,7 @@ const SignUpPage = () => {
         <>
             {serverError !== null
                 ?
-                <div className="fixed min-w-[250px]  mx-auto right-4 top-4 flex gap-4 justify-between items-center px-6 py-3 bg-red-200 rounded-xl">
-                    <div className="flex items-center gap-2">
-                        <Icon icon="warning" className="text-red-600 w-5 h-5 flex-shrink-0" />
-                        <span className="text-base text-red-600">{serverError}</span>
-                    </div>
-                    <button className="flex-shrink-0" onClick={() => setServerError("")}>
-                        <Icon icon="close-circle" className="w-5 h-5 text-slate-500" />
-                    </button>
-                </div>
+                <ServerError serverError={serverError} onClose={() => setServerError(null)} />
                 : null
             }
             <section className="container px-4 mx-auto text-center">
@@ -92,7 +85,7 @@ const SignUpPage = () => {
                         <Controller
                             control={control}
                             name="email"
-                            render={({ field, fieldState: { error, isValidating } }) =>
+                            render={({ field, fieldState: { error } }) =>
                                 <Input error={error !== undefined} errorStr={error?.type === "too_small" ? "Field is required" : error?.type === "invalid_string" ? "Email is not valid" : undefined} className="w-full" placeholder="Email" {...field} />
                             }
                         />
@@ -100,7 +93,7 @@ const SignUpPage = () => {
                         <Controller
                             control={control}
                             name="password"
-                            render={({ field, fieldState: { error, isValidating, } }) =>
+                            render={({ field, fieldState: { error } }) =>
                                 <Input type="password" error={error !== undefined} errorStr={error?.type === "too_small" ? "At least 8 symbols " : error?.type === "invalid_string" ? "The password must contain at least one lowercase letter, one uppercase letter and a number." : undefined} className="w-full" placeholder="Password" {...field} />
                             }
                         />

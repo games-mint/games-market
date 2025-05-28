@@ -2,7 +2,6 @@ import { CardHeader } from "@/app/components/header"
 import Navigation from "@/app/components/navigation"
 import { createClient } from "@/utils/supabase/server"
 import Link from "next/link"
-import { redirect } from "next/navigation"
 import { ReactNode } from "react"
 
 

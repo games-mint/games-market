@@ -23,7 +23,7 @@ export const StatusDict: { [key in DealStatus]: string } = {
 
 type Props = {
     userData: Profile,
-    offers: Offer[],
+    offers: { offer: Offer, seller: Profile }[],
     deals: FullDealDetails[],
     orders: FullDealDetails[]
 }
@@ -57,7 +57,7 @@ const ProfilePage = ({ userData, offers, deals, orders }: Props) => {
                             header={
                                 <div className='flex items-center'>
                                     <button className='px-4 py-2 text-violet-600 bg-violet-200 rounded-full  text-sm whitespace-nowrap font-medium'>In progress</button>
-                                    <button className='px-4 py-2 text-slate-500 rounded-full whitespace-nowrap text-sm  font-medium'>Completed</button>
+                                    <button className='px-4 py-2 text-slate-500 rounded-full whitespace-nowrap text-sm  font-medium'>Finished</button>
                                 </div>
                             }
                             title='Your orders'
@@ -216,8 +216,8 @@ const ProfilePage = ({ userData, offers, deals, orders }: Props) => {
                         </div>
 
                         <div className="grid grid-cols-[repeat(auto-fill,_minmax(190px,_1fr))] lg:grid-cols-[repeat(auto-fill,_minmax(220px,_1fr))] gap-4 mb-32">
-                            {offers.map(({ id, imageUrl, title, description, price }) => (
-                                <OfferCard key={id} id={id} link={`/edit/${id}`} image={imageUrl} title={title} description={description} price={price} authorName={userData.name} authorProfileImage={userData.avatarUrl} />
+                            {offers.map(({ offer, seller }) => (
+                                <OfferCard key={offer.id} offer={offer} link={`/edit/${offer.id}`} seller={seller} />
                             ))}
                         </div>
                     </div>

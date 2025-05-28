@@ -4,10 +4,11 @@ import TextArea from "@/app/components/common/textarea"
 import Button from "@/app/components/common/button"
 import { useState } from "react"
 import { Profile } from "@/common/types"
-import { removeUser, updateProfile } from "@/app/actions/profile"
-import Icon from "@/app/components/common/icon"
+import { updateProfile } from "@/app/actions/profile"
 import { uploadImage } from "@/app/actions/images/uploadImage"
 import { removeImage } from "@/app/actions/images/removeImage"
+import { signOutLocal } from "@/app/(auth)/actions/signout"
+import ServerError from "@/app/components/common/serverError"
 
 
 type Props = {
@@ -67,38 +68,30 @@ const EditProfileModal = ({ profile, closeModal }: Props) => {
         closeModal();
     }
 
-    const remove = async () => {
-        const { error } = await removeUser();
+    // const remove = async () => {
+    //     const { error } = await removeUser();
 
-        if (error) {
-            switch (error.code) {
-                case "unauthorized":
-                    setServerError("You are not authorised for this action")
-                    break;
-                case "server_error":
-                default:
-                    setServerError("Server error");
-            }
-            return;
-        }
+    //     if (error) {
+    //         switch (error.code) {
+    //             case "unauthorized":
+    //                 setServerError("You are not authorised for this action")
+    //                 break;
+    //             case "server_error":
+    //             default:
+    //                 setServerError("Server error");
+    //         }
+    //         return;
+    //     }
 
-        closeModal();
-    }
+    //     closeModal();
+    // }
 
     return (
         <>
 
             {serverError !== null
                 ?
-                <div className="fixed min-w-[250px]  mx-auto right-4 top-16 flex gap-4 justify-between items-center px-6 py-3 bg-red-200 rounded-xl">
-                    <div className="flex items-center gap-2">
-                        <Icon icon="warning" className="text-red-600 w-5 h-5 flex-shrink-0" />
-                        <span className="text-base text-red-600">{serverError}</span>
-                    </div>
-                    <button type="button" className="flex-shrink-0" onClick={() => setServerError(null)}>
-                        <Icon icon="close-circle" className="w-5 h-5 text-slate-500" />
-                    </button>
-                </div>
+                <ServerError serverError={serverError} onClose={() => setServerError(null)} />
                 : null
             }
 
@@ -120,10 +113,12 @@ const EditProfileModal = ({ profile, closeModal }: Props) => {
 
                     <div className="flex flex-col gap-8 w-full sm:flex-row sm:justify-between">
                         <div className="flex justify-between sm:order-2 sm:gap-6">
-                            <Button onClick={close} type="secondary">Cancel</Button>
+                            <Button onClick={closeModal} type="secondary">Cancel</Button>
                             <Button onClick={update}>Update profile</Button>
                         </div>
-                        <Button onClick={remove} className="sm:order-1" type="danger" icon="trash"  >Delete account</Button>
+                        {/* <Button onClick={remove} className="sm:order-1" type="danger" icon="trash"  >Delete account</Button> */}
+                        <Button onClick={signOutLocal} className="sm:order-1" type="secondary" icon="logout" >Sign out</Button>
+
                     </div>
                 </div>
             </div>

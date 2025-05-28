@@ -9,12 +9,12 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import ProductSelect from "./components/productSelect"
 import ImageUploader from "./components/imageUploader"
 import { createOrUpdatePost, removePost } from "@/app/actions/posts"
-import { PostData, PostDataWithoutId } from "@/app/actions/types"
-import Icon from "@/app/components/common/icon"
+import { PostDataWithoutId } from "@/app/actions/types"
 import { isEmpty } from "lodash"
 import { uploadImage } from "@/app/actions/images/uploadImage"
 import { removeImage } from "@/app/actions/images/removeImage"
 import { useRouter } from "next/navigation"
+import ServerError from "@/app/components/common/serverError"
 
 type Props = {
     post?: {
@@ -137,15 +137,7 @@ const EditPage = ({ post }: Props) => {
         <>
             {serverError !== null
                 ?
-                <div className="fixed min-w-[250px]  mx-auto right-4 top-16 flex gap-4 justify-between items-center px-6 py-3 bg-red-200 rounded-xl">
-                    <div className="flex items-center gap-2">
-                        <Icon icon="warning" className="text-red-600 w-5 h-5 flex-shrink-0" />
-                        <span className="text-base text-red-600">{serverError}</span>
-                    </div>
-                    <button type="button" className="flex-shrink-0" onClick={() => setServerError(null)}>
-                        <Icon icon="close-circle" className="w-5 h-5 text-slate-500" />
-                    </button>
-                </div>
+                <ServerError serverError={serverError} onClose={() => setServerError(null)} />
                 : null
             }
 
@@ -168,14 +160,14 @@ const EditPage = ({ post }: Props) => {
                             <Controller
                                 control={control}
                                 name="productId"
-                                render={({ field, fieldState: { error, isValidating } }) =>
+                                render={({ field, fieldState: { error } }) =>
                                     <ProductSelect error={error !== undefined} errorStr={error?.type === "too_small" ? "Field is required" : undefined}  {...field} />
                                 }
                             />
                             <Controller
                                 control={control}
                                 name="description"
-                                render={({ field, fieldState: { error, isValidating } }) =>
+                                render={({ field, fieldState: { error } }) =>
                                     <TextArea error={error !== undefined} errorStr={error?.type === "too_small" ? "Field is required" : undefined} className="w-full" placeholder="Description" {...field} />
                                 }
                             />
@@ -183,7 +175,7 @@ const EditPage = ({ post }: Props) => {
                             <Controller
                                 control={control}
                                 name="price"
-                                render={({ field, fieldState: { error, isValidating } }) =>
+                                render={({ field, fieldState: { error } }) =>
                                     <Input type="number" error={error !== undefined} errorStr={error?.type === "too_small" ? "Field is required" : undefined} icon="flash" className="w-full" placeholder="Price" {...field} />
                                 }
                             />

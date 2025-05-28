@@ -16,6 +16,7 @@ import GoogleIcon from "./icons/google"
 import ImportIcon from "./icons/import"
 import LayerIcon from "./icons/layer"
 import LikeTagIcon from "./icons/like-tag"
+import LogoutIcon from "./icons/logout"
 import MobileIcon from "./icons/mobile"
 import MoneysIcon from "./icons/moneys"
 import MonitorIcon from "./icons/monitor"
@@ -97,6 +98,8 @@ const Icon = ({ icon, className }: Props) => {
             return <CloseCircleIcon className={className} />
         case 'trash':
             return <TrashIcon className={className} />
+        case 'logout':
+            return <LogoutIcon className={className} />
     }
 }
 

@@ -1,3 +1,4 @@
+'use client'
 import { ChangeEvent } from "react";
 import Icon from "./icon";
 import { Icons } from "./icon/types";

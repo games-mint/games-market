@@ -50,6 +50,7 @@ export const removeUser = async (): Promise<ApiReturnT<null, null>> => {
     const { error } = await supabase.auth.admin.deleteUser(userData.user.id)
 
     if (error) {
+        console.log(error);
         return {
             error: { code: 'server_error' },
             data: null,

@@ -8,3 +8,8 @@ export const getProducts = async () => {
     
     return options
 }
+
+
+export const getPopularGames = async () => {
+    return await db.select().from(products).limit(10);
+}

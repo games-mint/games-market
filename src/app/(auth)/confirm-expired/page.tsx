@@ -1,7 +1,7 @@
+'use client'
 import Button from "@/app/components/common/button"
-import Icon from "@/app/components/common/icon"
 import Input from "@/app/components/common/input"
-import Link from "next/link"
+
 
 const ConfirmExpiredPage = () => {
     return (

@@ -28,7 +28,7 @@ const ProductSelect = ({ value, disabled, error, errorStr, onChange, onBlur, onF
     const [appsExpanded, setIsAppsExpanded] = useState(false);
 
     const [products, setProducts] = useState<Product[]>([]);
-    const [isPending, startTransition] = useTransition();
+    const [, startTransition] = useTransition();
     const [searchStr, setSearchStr] = useState('');
 
     const valueText = products.find(el => el.id === value)?.name || "";
@@ -59,7 +59,7 @@ const ProductSelect = ({ value, disabled, error, errorStr, onChange, onBlur, onF
             document.removeEventListener('click', onclick);
         }
 
-    }, [containerRef, setIsExpanded]) // close select on click outside
+    }, [containerRef, onBlur, setIsExpanded]) // close  on click outside
 
 
 

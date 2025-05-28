@@ -1,5 +1,4 @@
 import Dropdown from "@/app/components/common/dropdown";
-import Featured from "@/app/components/featured";
 import OfferCard from "@/app/components/offerCard";
 import { db } from "@/db";
 import { posts, profiles } from "@/db/schema";
@@ -13,7 +12,7 @@ const OffersPage = async ({
 
     const { id } = await params;
 
-    const offers = await db.select().from(posts).where(eq(posts.productId, id)).leftJoin(profiles, eq(posts.authorId, profiles.id));
+    const offers = (await db.select().from(posts).where(eq(posts.productId, id)).leftJoin(profiles, eq(profiles.id, posts.authorId))).map(el => ({ offer: el.posts!, seller: el.profiles! }))
 
     return (
         <>
@@ -30,11 +29,9 @@ const OffersPage = async ({
                         </div>
                     </div>
 
-                    {/* <Featured title="Featured offers" /> */}
-
                     <div className="grid grid-cols-[repeat(auto-fill,_minmax(190px,_1fr))] lg:grid-cols-[repeat(auto-fill,_minmax(220px,_1fr))] gap-4 mb-32">
-                        {offers.map(({ posts: { title, description, id, price, imageUrl: image_url }, profiles }) => (
-                            <OfferCard authorName={profiles?.name} key={id} id={id} title={title} description={description} image={image_url} price={price} />
+                        {offers.map(({ offer, seller }) => (
+                            <OfferCard key={offer.id} offer={offer} seller={seller} />
                         ))}
                     </div>
                 </div>

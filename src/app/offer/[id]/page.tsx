@@ -6,7 +6,7 @@ import { posts, profiles } from "@/db/schema";
 import OfferPage from "./offerPage";
 import { Profile } from "@/common/types";
 
-export default async function ({
+export default async function Page ({
     params,
 }: {
     params: Promise<{ id: number }>

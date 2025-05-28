@@ -1,9 +1,11 @@
 'use client';
-import { useRef } from "react";
+import { useEffect, useRef, useState, useTransition } from "react";
 
 import Carousel, { CarouselElement, CarouselRef } from "@/app/components/common/carousel";
 import Icon from "@/app/components/common/icon";
 import OfferCard from "./offerCard";
+import { Offer, Profile } from "@/common/types";
+import { getRecomendedPosts } from "../actions/featured";
 
 
 type Props = {
@@ -12,6 +14,18 @@ type Props = {
 
 const Featured = ({ title }: Props) => {
     const carouselRef = useRef<CarouselRef>(null);
+    const [posts, setPosts] = useState<{ post: Offer, seller: Profile }[]>([]);
+    const [transition, startTransition] = useTransition();
+
+    useEffect(() => {
+        startTransition(async () => {
+            const postsData = await getRecomendedPosts()
+            setPosts(postsData.map(el => ({
+                post: el.posts!,
+                seller: el.profiles!
+            })))
+        })
+    }, [])
 
     const nextEl = () => {
         if (carouselRef.current === null)
@@ -44,24 +58,16 @@ const Featured = ({ title }: Props) => {
             </div>
 
             <Carousel ref={carouselRef} gap={24}>
-                <CarouselElement>
-                    <OfferCard className="w-[220px] lg:w-[260px]" type="alt" />
-                </CarouselElement>
+                {transition
+                    ? <div className="" />
+                    :
+                    posts.map(post => (
+                        <CarouselElement key={post.post.id}>
+                            <OfferCard offer={post.post} seller={post.seller} className="w-[220px] lg:w-[260px]" type="alt" />
+                        </CarouselElement>
+                    ))
 
-                <CarouselElement>
-                    <OfferCard className="w-[220px] lg:w-[260px]" type="alt" />
-                </CarouselElement>
-
-                <CarouselElement>
-                    <OfferCard className="w-[220px] lg:w-[260px]" type="alt" />
-                </CarouselElement>
-
-                <CarouselElement>
-                    <OfferCard className="w-[220px] lg:w-[260px]" type="alt" />
-                </CarouselElement>
-                <CarouselElement>
-                    <OfferCard className="w-[220px] lg:w-[260px]" type="alt" />
-                </CarouselElement>
+                }
             </Carousel>
         </div>
     )

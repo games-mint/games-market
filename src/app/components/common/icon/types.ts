@@ -30,4 +30,5 @@ export type Icons =
     | 'warning'
     | 'close-circle'
     | 'trash'
+    | 'logout'
     ;

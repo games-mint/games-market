@@ -1,9 +1,14 @@
+'use server'
 import Link from "next/link";
 import Text from "@/app/components/common/text";
 import Featured from "@/app/components/featured";
 import Game from "@/app/components/common/game";
+import { getPopularGames } from "@/app/actions/products";
 
-const MainPage = () => {
+const MainPage = async () => {
+
+    const popularGames = await getPopularGames();
+
     return (
         <>
             <section className="container mx-auto px-4 pt-10 lg:pt-16">
@@ -17,15 +22,9 @@ const MainPage = () => {
                     </h3>
 
                     <div className="grid grid-cols-[repeat(auto-fill,_minmax(160px,_1fr))] lg:grid-cols-[repeat(auto-fill,_minmax(220px,_1fr))] gap-4">
-                        <Game name="DOTA 2" image="/dota-2.png" />
-                        <Game name="DOTA 2" image="/dota-2.png" />
-                        <Game name="DOTA 2" image="/dota-2.png" />
-                        <Game name="DOTA 2" image="/dota-2.png" />
-                        <Game name="DOTA 2" image="/dota-2.png" />
-                        <Game name="DOTA 2" image="/dota-2.png" />
-                        <Game name="DOTA 2" image="/dota-2.png" />
-                        <Game name="DOTA 2" image="/dota-2.png" />
-                        <Game name="DOTA 2" image="/dota-2.png" />
+                        {popularGames.map(({ id, name, imageUrl }) => (
+                            <Game key={id} name={name} image={imageUrl} id={id} />
+                        ))}
                     </div>
 
                 </div>
