@@ -65,7 +65,7 @@ export const CardHeader = () => {
 
 
 
-export const ProfileHeader = () => {
+export const ProfileHeader = ({ openModal}: { openModal: () => void }) => {
     const router = useRouter()
 
     const goBack = () => {
@@ -82,7 +82,7 @@ export const ProfileHeader = () => {
                             Go back
                         </span>
                     </button>
-                    <button className="px-6 py-2 bg-slate-200 flex items-center justify-center rounded-full">
+                    <button onClick={openModal} className="px-6 py-2 bg-slate-200 flex items-center justify-center rounded-full">
                         <Icon className="w-6 h-6" icon="settings" />
                     </button>
                 </div>

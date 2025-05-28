@@ -12,6 +12,8 @@ export type Icons =
     'monitor' |
     'arrow-circle-down' |
     'arrow-circle-up' |
+    'arrow-circle-left' |
+    'arrow-circle-right' |
     'filter-search' |
     'star' |
     'bag' |
@@ -27,4 +29,5 @@ export type Icons =
     | 'google'
     | 'warning'
     | 'close-circle'
+    | 'trash'
     ;

@@ -9,44 +9,43 @@ export const Users = authSchema.table("users", {
 });
 
 export const categoryEnum = pgEnum('category', ['apps', 'games']);
+export const dealStatusEnum = pgEnum('deal_status', ['started', 'user_paid', 'completed']);
 
 
 export const profiles = pgTable('profiles', {
     id: uuid('id').primaryKey().references(() => Users.id, { onDelete: 'cascade' }),
     name: varchar('name', { length: 256 }).notNull().unique().default(sql`'user-' || gen_random_uuid()`,),
     bio: varchar("bio", { length: 256 }),
-    avatar_url: varchar("avatar_url", { length: 256 }),
-    created_at: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+    avatarUrl: varchar("avatar_url", { length: 256 }),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
 });
-
-// export const profilesRelations = relations(profiles, ({ many }) => ({
-//     posts: many(posts)
-// }))
-
 export const posts = pgTable('posts', {
     id: serial('id').primaryKey(),
-    author_id: uuid('author_id').references(() => profiles.id),
-    product_id: integer('product_id').references(() => products.id),
-    created_at: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+    authorId: uuid('author_id').references(() => profiles.id).notNull(),
+    productId: integer('product_id').references(() => products.id).notNull(),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
     description: text("bio").notNull(),
     title: varchar("title", { length: 256 }).notNull(),
-    image_url: varchar("image_url", { length: 256 }).notNull(),
+    imageUrl: varchar("image_url", { length: 256 }).notNull(),
     price: integer('price').notNull()
 })
-
-// export const postsRelations = relations(posts, ({ one }) => ({
-//     author: one(profiles, {
-//         fields: [posts.author_id],
-//         references: [profiles.id]
-//     })
-// }))
 
 
 export const products = pgTable('products', {
     id: serial('id').primaryKey(),
     name: varchar("name", { length: 256 }).notNull(),
-    category: categoryEnum(),
-    image_url: varchar("image_url", { length: 256 }).notNull(),
+    category: categoryEnum().notNull(),
+    imageUrl: varchar("image_url", { length: 256 }).notNull(),
+})
+
+
+export const deals = pgTable('deals', {
+    id: serial('id').primaryKey(),
+    sellerId: uuid('seller_id').references(() => profiles.id).notNull(),
+    buyerId: uuid('buyer_id').references(() => profiles.id).notNull(),
+    postId: integer('post_id').references(() => posts.id).notNull(),
+    status: dealStatusEnum().notNull(),
+    result: text('result'),
 })
 
 

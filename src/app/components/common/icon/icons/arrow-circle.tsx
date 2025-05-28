@@ -22,3 +22,20 @@ export const ArrowCircleUpIcon = ({ className }: Props) => {
     )
 
 }
+
+
+export const ArrowCircleLeftIcon = ({ className }: Props) => {
+    return (
+        <ArrowCircleDownIcon className={`rotate-90 ${className}`} />
+
+    )
+
+}
+
+export const ArrowCircleRightIcon = ({ className }: Props) => {
+    return (
+        <ArrowCircleDownIcon className={`-rotate-90 ${className}`} />
+
+    )
+
+}

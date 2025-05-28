@@ -29,6 +29,20 @@
       "when": 1748336762286,
       "tag": "0003_acoustic_beyonder",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1748432160389,
+      "tag": "0004_shocking_corsair",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1748439481464,
+      "tag": "0005_orange_tigra",
+      "breakpoints": true
     }
   ]
 }

@@ -13,7 +13,7 @@ const OffersPage = async ({
 
     const { id } = await params;
 
-    const offers = await db.select().from(posts).where(eq(posts.product_id, id)).leftJoin(profiles, eq(posts.author_id, profiles.id));
+    const offers = await db.select().from(posts).where(eq(posts.productId, id)).leftJoin(profiles, eq(posts.authorId, profiles.id));
 
     return (
         <>
@@ -33,7 +33,7 @@ const OffersPage = async ({
                     {/* <Featured title="Featured offers" /> */}
 
                     <div className="grid grid-cols-[repeat(auto-fill,_minmax(190px,_1fr))] lg:grid-cols-[repeat(auto-fill,_minmax(220px,_1fr))] gap-4 mb-32">
-                        {offers.map(({ posts: { title, description, id, price, image_url }, profiles }) => (
+                        {offers.map(({ posts: { title, description, id, price, imageUrl: image_url }, profiles }) => (
                             <OfferCard authorName={profiles?.name} key={id} id={id} title={title} description={description} image={image_url} price={price} />
                         ))}
                     </div>

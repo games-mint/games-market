@@ -3,30 +3,33 @@ import Icon from "./icon";
 import { Icons } from "./icon/types";
 
 type Props = {
+    value?: string | number,
     placeholder?: string,
     className?: string,
     icon?: Icons,
-    type?: 'text' | 'password' | 'email',
+    type?: 'text' | 'password' | 'email' | 'number',
     loading?: boolean,
     error?: boolean,
     disabled?: boolean,
     errorStr?: string,
-    onChange?: (value: string) => void,
+    onChange?: (value: string | number) => void,
     onBlur?: () => void,
     onFocus?: () => void,
 }
 
-const Input = ({ placeholder, icon, type = 'text', loading, error, errorStr, disabled, className, onChange, onBlur, onFocus }: Props) => {
+const Input = ({ value, placeholder, icon, type = 'text', loading, error, errorStr, disabled, className, onChange, onBlur, onFocus }: Props) => {
 
     const change = (e: ChangeEvent<HTMLInputElement>) => {
         if (onChange === undefined) return;
-        onChange(e.target.value);
+        const value = type === "number" ? parseInt(e.target.value) : e.target.value;
+        onChange(value);
     }
 
     return (
-        <div className="flex flex-col gap-1">
-            <div className={`flex items-center justify-between gap-2 px-4 py-3 rounded-full border   ${disabled ? "bg-slate-100" : "bg-white"} ${error ? "border-red-500" : "border-slate-300"} ${className}`}>
+        <div className={`flex flex-col gap-1 ${className}`}>
+            <div className={`flex items-center justify-between gap-2 px-4 py-3 rounded-full border   ${disabled ? "bg-slate-100" : "bg-white"} ${error ? "border-red-500" : "border-slate-300"}`}>
                 <input
+                    value={value}
                     onChange={change}
                     type={type}
                     onBlur={onBlur}
@@ -39,7 +42,7 @@ const Input = ({ placeholder, icon, type = 'text', loading, error, errorStr, dis
             </div>
 
             {errorStr
-                ? <div className="flex gap-1 items-center">
+                ? <div className="flex gap-1 items-center pl-2">
                     <span className="text-sm text-red-600">{errorStr}</span>
                 </div>
                 : null

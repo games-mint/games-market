@@ -1,5 +1,5 @@
 import AddSquareIcon from "./icons/add-square"
-import { ArrowCircleDownIcon, ArrowCircleUpIcon } from "./icons/arrow-circle"
+import { ArrowCircleDownIcon, ArrowCircleLeftIcon, ArrowCircleRightIcon, ArrowCircleUpIcon } from "./icons/arrow-circle"
 import { ArrowSquareDownIcon, ArrowSquareUpIcon } from "./icons/arrow-square"
 import { ArrowLeftIcon, ArrowRightIcon } from "./icons/arrows"
 import BagIcon from "./icons/bag"
@@ -22,6 +22,7 @@ import MonitorIcon from "./icons/monitor"
 import ReceiptIcon from "./icons/receipt"
 import SettingsIcon from "./icons/settings"
 import StarIcon from "./icons/star"
+import TrashIcon from "./icons/trash"
 import WarningIcon from "./icons/warning"
 import { Icons } from "./types"
 
@@ -56,6 +57,10 @@ const Icon = ({ icon, className }: Props) => {
             return <ArrowCircleDownIcon className={className} />
         case 'arrow-circle-up':
             return <ArrowCircleUpIcon className={className} />
+        case 'arrow-circle-left':
+            return <ArrowCircleLeftIcon className={className} />
+        case 'arrow-circle-right':
+            return <ArrowCircleRightIcon className={className} />
         case 'filter-search':
             return <FilterSearchIcon className={className} />
         case 'star':
@@ -90,6 +95,8 @@ const Icon = ({ icon, className }: Props) => {
             return <WarningIcon className={className} />
         case 'close-circle':
             return <CloseCircleIcon className={className} />
+        case 'trash':
+            return <TrashIcon className={className} />
     }
 }
 

@@ -5,7 +5,7 @@ import { eq } from "drizzle-orm";
 import Game from "@/app/components/common/game";
 
 const AppsPage = async () => {
-    const apps = await db.select({ id: products.id, name: products.name, image_url: products.image_url }).from(products).where(eq(products.category, 'apps'));
+    const apps = await db.select({ id: products.id, name: products.name, image_url: products.imageUrl }).from(products).where(eq(products.category, 'apps'));
 
     return (
         <>
