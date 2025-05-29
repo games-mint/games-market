@@ -44,7 +44,7 @@ const TermsPage = () => {
                                 <br />
                                 <ul className="list-disc list-inside">
                                     <li>you are not in a country under a U.S. government embargo or designated as a
-                                        "terrorist-supporting" country;
+                                        terrorist-supporting country;
                                     </li>
                                     <li>you are not on any U.S. government list of prohibited or restricted parties.</li>
                                 </ul>
@@ -130,7 +130,7 @@ const TermsPage = () => {
                                     availability.</p>
                                 <p>Conditions for third-party resources, including any rights granted in their content, are governed
                                     by those third
-                                    parties' terms and conditions or by applicable law.</p>
+                                    parties terms and conditions or by applicable law.</p>
                                 <br />
                                 <h3>Acceptable use</h3>
                                 <br />
@@ -326,7 +326,7 @@ const TermsPage = () => {
                                 <p>However, this exclusion does not apply to damages affecting life, health, or physical integrity,
                                     damages arising
                                     from the breach of significant contractual obligations (such as those necessary to fulfill the
-                                    contract's
+                                    contracts
                                     purpose), and/or damages resulting from intentional or gross negligence, provided that our
                                     website has been used
                                     appropriately and correctly by you.</p>
@@ -344,7 +344,7 @@ const TermsPage = () => {
                                     they are express,
                                     implied, or even required by law. These include assurances about the quality of the service, its
                                     suitability for
-                                    your specific needs, or whether it infringes on anyone else's rights. Please keep in mind that
+                                    your specific needs, or whether it infringes on anyone elses rights. Please keep in mind that
                                     any advice or
                                     information you receive from us or through our service does not create any warranties beyond
                                     what we have
@@ -479,7 +479,7 @@ const TermsPage = () => {
                                 <br />
                                 <h3 className="text-2xl">Privacy policy</h3>
                                 <br />
-                                <p>For information on the use of personal data, you can refer to our website's privacy policy.</p>
+                                <p>For information on the use of personal data, you can refer to our websites privacy policy.</p>
                                 <br />
                                 <h3 className="text-2xl">Intellectual property rights</h3>
                                 <br />
