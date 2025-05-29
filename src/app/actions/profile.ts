@@ -6,6 +6,7 @@ import { db } from "@/db";
 import { profiles } from "@/db/schema";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
+import { eq } from "drizzle-orm";
 
 
 type UpdateProfileData = {
@@ -59,4 +60,16 @@ export const removeUser = async (): Promise<ApiReturnT<null, null>> => {
 
     revalidatePath('/', 'layout')
     redirect('/');
+}
+
+
+export const getCurrentProfile = async () => {
+    const supabase = await createClient()
+
+    const { data } = await supabase.auth.getUser()
+
+    if (data.user === null)
+        return null;
+
+    return (await db.select().from(profiles).where(eq(profiles.id, data.user.id)))[0]
 }

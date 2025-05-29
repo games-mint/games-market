@@ -4,21 +4,17 @@ import Icon from '@/app/components/common/icon';
 import Title from '../components/common/title';
 import Card from '../components/common/card';
 import OfferCard from '../components/offerCard';
-import Dropdown from '../components/common/dropdown';
-import Link from 'next/link';
-import { DealStatus, FullDealDetails, Offer, Profile } from '@/common/types';
+import { FullDealDetails, Offer, Profile } from '@/common/types';
 import Avatar from '../components/common/avatar';
 import EditProfileModal from './components/modal';
 import { useState } from 'react';
 import { ProfileHeader } from '../components/header';
 import Navigation from '../components/navigation';
+import OrdersCard from './components/orders';
+import DealsCard from './components/deals';
 
 
-export const StatusDict: { [key in DealStatus]: string } = {
-    "started": "Waiting for user payment",
-    "user_paid": "Waiting for delivery",
-    "completed": "Deal is completed"
-}
+
 
 
 type Props = {
@@ -52,63 +48,11 @@ const ProfilePage = ({ userData, offers, deals, orders }: Props) => {
 
                 <div className='lg:flex lg:gap-4 lg:container lg:mx-auto lg:px-4 lg:mt-16'>
                     <section className='max-lg:container max-lg:mx-auto max-lg:px-4 max-lg:mt-8 lg:w-[50%]'>
-                        <Card
-                            className='h-full'
-                            header={
-                                <div className='flex items-center'>
-                                    <button className='px-4 py-2 text-violet-600 bg-violet-200 rounded-full  text-sm whitespace-nowrap font-medium'>In progress</button>
-                                    <button className='px-4 py-2 text-slate-500 rounded-full whitespace-nowrap text-sm  font-medium'>Finished</button>
-                                </div>
-                            }
-                            title='Your orders'
-                        >
-                            <div className='grid grid-cols-[repeat(auto-fill,_minmax(170px,_1fr))] gap-4'>
-                                {orders.map(({ deal, seller, offer }) => (
-                                    <Link key={deal.id} href={`/orders/${deal.id}`} className='px-2 py-3 flex flex-col gap-4 bg-white rounded-2xl'>
-                                        <h5 className='font-medium text-sm'>{offer.title}</h5>
-                                        <p className='text-slate-400 text-xs'>{StatusDict[deal.status]}</p>
-                                        <div className='flex items-center gap-2'>
-                                            <Avatar url={seller.avatarUrl} />
-                                            <span className='text-xs text-slate-500'>{seller.name}</span>
-                                        </div>
-                                        <div className='flex items-center justify-end gap-2 text-violet-600'>
-                                            <span className='text-xl'>{offer.price}</span>
-                                            <Icon className='w-4 h-4' icon="flash" />
-                                        </div>
-                                    </Link>
-                                ))}
-                            </div>
-                        </Card>
+                        <OrdersCard orders={orders} />
                     </section>
 
                     <section className='max-lg:container max-lg:mx-auto max-lg:px-4 max-lg:mt-8 lg:w-[50%]'>
-                        <Card
-                            className='h-full'
-                            header={
-                                <div className='flex items-center'>
-                                    <button className='px-4 py-2 text-violet-600 bg-violet-200 rounded-full  text-sm whitespace-nowrap font-medium'>In progress</button>
-                                    <button className='px-4 py-2 text-slate-500 rounded-full whitespace-nowrap text-sm  font-medium'>Completed</button>
-                                </div>
-                            }
-                            title='Your deals'
-                        >
-                            <div className='grid grid-cols-[repeat(auto-fill,_minmax(170px,_1fr))] gap-4'>
-                                {deals.map(({ deal, seller, offer }) => (
-                                    <Link key={deal.id} href={`/deals/${deal.id}`} className='px-2 py-3 flex flex-col gap-4 bg-white rounded-2xl'>
-                                        <h5 className='font-medium text-sm'>{offer.title}</h5>
-                                        <p className='text-slate-400 text-xs'>{StatusDict[deal.status]}</p>
-                                        <div className='flex items-center gap-2'>
-                                            <Avatar url={seller.avatarUrl} />
-                                            <span className='text-xs text-slate-500'>{seller.name}</span>
-                                        </div>
-                                        <div className='flex items-center justify-end gap-2 text-violet-600'>
-                                            <span className='text-xl'>{offer.price}</span>
-                                            <Icon className='w-4 h-4' icon="flash" />
-                                        </div>
-                                    </Link>
-                                ))}
-                            </div>
-                        </Card>
+                        <DealsCard deals={deals}/>
                     </section>
                 </div>
 
@@ -211,7 +155,7 @@ const ProfilePage = ({ userData, offers, deals, orders }: Props) => {
                         </h3>
                         <div className="w-full overflow-x-scroll no-scrollbar">
                             <div className="flex items-center gap-4">
-                                <Dropdown title='Sort by' />
+                                {/* <Dropdown title='Sort by' /> */}
                             </div>
                         </div>
 

@@ -1,6 +1,5 @@
 
 import Card from '@/app/components/common/card';
-import Dropdown from '@/app/components/common/dropdown';
 import Icon from '@/app/components/common/icon';
 import Text from '@/app/components/common/text';
 import Title from '@/app/components/common/title';
@@ -129,7 +128,7 @@ const SellerPage = async ({
                     </h3>
                     <div className="w-full overflow-x-scroll no-scrollbar">
                         <div className="flex items-center gap-4">
-                            <Dropdown title='Sort by' />
+                            {/* <Dropdown title='Sort by' /> */}
                         </div>
                     </div>
 

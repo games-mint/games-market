@@ -1,4 +1,14 @@
-import { dealStatusEnum } from "@/db/schema";
+import { dealStatusEnum, categoryEnum } from "@/db/schema";
+
+export type ProductCategories = (typeof categoryEnum.enumValues)[number]
+export type DealStatus = (typeof dealStatusEnum.enumValues)[number]
+
+export type Product = {
+    id: number;
+    name: string;
+    category: ProductCategories;
+    imageUrl: string;
+}
 
 export type Offer = {
     id: number;
@@ -19,7 +29,7 @@ export type Profile = {
     createdAt: Date;
 }
 
-export type DealStatus = (typeof dealStatusEnum.enumValues)[number]
+
 
 export type Deal = {
     id: number,
