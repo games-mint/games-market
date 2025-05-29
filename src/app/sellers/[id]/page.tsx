@@ -88,10 +88,10 @@ const SellerPage = async ({
                                 </div>
 
                             </div>
-                            <button className='flex items-center gap-4 px-6 py-3 text-white bg-violet-600 rounded-full w-fit'>
+                            {/* <button className='flex items-center gap-4 px-6 py-3 text-white bg-violet-600 rounded-full w-fit'>
                                 <span className='font-medium'>Leave a review</span>
                                 <Icon className='w-6 h-6' icon='like-tag' />
-                            </button>
+                            </button> */}
                         </div>
                     </Card>
                 </section>

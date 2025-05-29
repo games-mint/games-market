@@ -32,10 +32,10 @@ const MainPage = async () => {
 
             <footer className="flex flex-col lg:flex-row lg:justify-between gap-8 container px-4 mx-auto py-8 mb-20 mt-10">
                 <nav className="flex flex-col gap-8 lg:flex-row lg:order-2">
-                    <Link href="/" className="text-slate-700 font-medium text-base">Terms of Service</Link>
-                    <Link href="/" className="text-slate-700 font-medium text-base">Privacy Policy</Link>
-                    <Link href="/" className="text-slate-700 font-medium text-base">Contacts</Link>
-                    <Link href="/" className="text-slate-700 font-medium text-base">FAQ</Link>
+                    <Link href="/terms" className="text-slate-700 font-medium text-base">Terms of Service</Link>
+                    <Link href="/privacy" className="text-slate-700 font-medium text-base">Privacy Policy</Link>
+                    <Link href="/contacts" className="text-slate-700 font-medium text-base">Contacts</Link>
+                    <Link href="/faq" className="text-slate-700 font-medium text-base">FAQ</Link>
                 </nav>
                 <Text className="text-slate-700">© 2025 Digital Trading/Global Digital Technology.<br /> All rights reserved.</Text>
             </footer>
