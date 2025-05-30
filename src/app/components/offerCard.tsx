@@ -19,8 +19,8 @@ const OfferCard = ({ type = "primary", offer, seller, link, className }: Props) 
                 <Image className="object-cover" fill src={offer.imageUrl} alt="Dota 2 thumbnails" />
             </div>
             <h4 className="font-medium text-base">{offer.title}</h4>
-            <p className='text-sm text-slate-600'>{offer.description}</p>
-            <div className="flex gap-2 items-center">
+            <p className='text-sm text-slate-600 text-ellipsis max-h-[60px] overflow-hidden'>{offer.description}</p>
+            <div className="flex gap-2 items-center mt-auto">
                 {seller.avatarUrl
                     ? <div className="relative w-6 h-6 rounded-full overflow-clip flex-shrink-0">
                         <Image className="object-cover" src={seller.avatarUrl} fill alt="profile image" />

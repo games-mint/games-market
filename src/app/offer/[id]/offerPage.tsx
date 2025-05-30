@@ -74,10 +74,15 @@ const OfferPage = ({ offer, seller }: Props) => {
                                 <div className="flex flex-col gap-2">
                                     <Text className="text-slate-700">{seller.name}</Text>
                                     <Text size="sm" className="text-slate-500">from July 2025</Text>
-                                    <div className="flex items-center gap-2">
-                                        <Icon icon="star" className="w-5 h-5 text-amber-500" />
-                                        <Text className="font-medium">4.8</Text>
-                                    </div>
+                                    {seller.rating !== null
+                                        ?
+                                        <div className="flex items-center gap-2">
+                                            <Icon icon="star" className="w-5 h-5 text-amber-500" />
+                                            <Text className="font-medium">{seller.rating}</Text>
+                                        </div>
+                                        :
+                                        null
+                                    }
                                 </div>
                             </Link>
                         </div>

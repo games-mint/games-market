@@ -1,6 +1,6 @@
 
 import { sql } from "drizzle-orm";
-import { integer, pgEnum, pgSchema, pgTable, serial, text, timestamp, uuid, varchar } from "drizzle-orm/pg-core";
+import { integer, pgEnum, pgSchema, pgTable, real, serial, text, timestamp, uuid, varchar } from "drizzle-orm/pg-core";
 
 const authSchema = pgSchema("auth");
 
@@ -18,6 +18,7 @@ export const profiles = pgTable('profiles', {
     bio: varchar("bio", { length: 256 }),
     avatarUrl: varchar("avatar_url", { length: 256 }),
     createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+    rating: real('rating')
 });
 export const posts = pgTable('posts', {
     id: serial('id').primaryKey(),
@@ -49,3 +50,11 @@ export const deals = pgTable('deals', {
 })
 
 
+export const reviews = pgTable('reviews', {
+    id: serial('id').primaryKey(),
+    authorId: uuid('author_id').references(() => profiles.id).notNull(),
+    receiverId: uuid('receiver_id ').references(() => profiles.id).notNull(),
+    rating: integer('rating').notNull(),
+    message: text('message'),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+})

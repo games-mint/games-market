@@ -63,7 +63,7 @@ const Featured = ({ title }: Props) => {
                     :
                     posts.map(post => (
                         <CarouselElement key={post.post.id}>
-                            <OfferCard offer={post.post} seller={post.seller} className="w-[220px] lg:w-[260px]" type="alt" />
+                            <OfferCard offer={post.post} seller={post.seller} className="w-[220px] lg:w-[260px] h-full" type="alt" />
                         </CarouselElement>
                     ))
 

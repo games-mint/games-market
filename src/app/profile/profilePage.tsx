@@ -4,7 +4,7 @@ import Icon from '@/app/components/common/icon';
 import Title from '../components/common/title';
 import Card from '../components/common/card';
 import OfferCard from '../components/offerCard';
-import { FullDealDetails, Offer, Profile } from '@/common/types';
+import { FullDealDetails, Offer, Profile, Review } from '@/common/types';
 import Avatar from '../components/common/avatar';
 import EditProfileModal from './components/modal';
 import { useState } from 'react';
@@ -12,6 +12,8 @@ import { ProfileHeader } from '../components/header';
 import Navigation from '../components/navigation';
 import OrdersCard from './components/orders';
 import DealsCard from './components/deals';
+import ReviewCard from '../sellers/[id]/components/reviewCard';
+import ReviewsModal from '../components/common/modals/reviewsModal';
 
 
 
@@ -21,11 +23,16 @@ type Props = {
     userData: Profile,
     offers: { offer: Offer, seller: Profile }[],
     deals: FullDealDetails[],
-    orders: FullDealDetails[]
+    orders: FullDealDetails[],
+    reviews: {
+        review: Review,
+        author: Profile
+    }[]
 }
 
-const ProfilePage = ({ userData, offers, deals, orders }: Props) => {
+const ProfilePage = ({ userData, offers, deals, orders, reviews }: Props) => {
     const [showModal, setShowModal] = useState(false);
+    const [showReviewsModal, setShowReviewsModal] = useState(false);
 
     return (
         <>
@@ -35,6 +42,12 @@ const ProfilePage = ({ userData, offers, deals, orders }: Props) => {
                 {showModal
                     ? <EditProfileModal closeModal={() => setShowModal(false)} profile={userData} />
                     : null}
+
+                {showReviewsModal
+                    ? <ReviewsModal closeModal={() => setShowReviewsModal(false)} reviews={reviews} />
+                    : null}
+
+
 
                 <section className='container mx-auto px-4 pt-10'>
                     <div className="flex gap-2 items-center">
@@ -52,50 +65,25 @@ const ProfilePage = ({ userData, offers, deals, orders }: Props) => {
                     </section>
 
                     <section className='max-lg:container max-lg:mx-auto max-lg:px-4 max-lg:mt-8 lg:w-[50%]'>
-                        <DealsCard deals={deals}/>
+                        <DealsCard deals={deals} />
                     </section>
                 </div>
 
 
                 <div className='lg:flex lg:gap-4 lg:container lg:mx-auto lg:px-4 lg:mt-16'>
                     <section className='max-lg:container max-lg:px-4 max-lg:mx-auto max-lg:mt-8 lg:w-[50%]'>
-                        <Card expandable title='Last reviews' className='h-full' >
+                        <Card onExpand={() => setShowReviewsModal(true)} expandable title='Last reviews' className='h-full' >
                             <div className='flex flex-col gap-8'>
                                 <div className='flex items-center gap-2'>
                                     <Icon className='w-6 h-6 text-amber-500' icon="star" />
-                                    <Title size="h1" className='text-slate-700'>4.8</Title>
-                                    <Text size='sm' className='font-medium text-slate-700'>500 reviews</Text>
+                                    <Title size="h1" className='text-slate-700'>{userData.rating}</Title>
+                                    <Text size='sm' className='font-medium text-slate-700'>{reviews.length} reviews</Text>
                                 </div>
                                 <div className='flex gap-4'>
-                                    <div className='flex flex-col gap-4 bg-white rounded-xl px-4 py-6 max-w-[300px]'>
-                                        <span className='text-sm text-slate-400'>20 May</span>
-                                        <div className='flex gap-2'>
-                                            <Icon className='w-6 h-6 text-amber-500' icon="star" />
-                                            <Icon className='w-6 h-6 text-amber-500' icon="star" />
-                                            <Icon className='w-6 h-6 text-amber-500' icon="star" />
-                                            <Icon className='w-6 h-6 text-amber-500' icon="star" />
-                                            <Icon className='w-6 h-6 text-slate-400' icon="star" />
-                                        </div>
-                                        <span className='text-sm text-slate-400'>@DragonBall_190</span>
-                                        <p className='text-sm'>
-                                            Fast delivery and everything worked perfectly. Great seller, highly recommended for anyone looking to upgrade their game account!
-                                        </p>
-                                    </div>
-                                    <div className='hidden 2xl:flex flex-col gap-4 bg-white rounded-xl px-4 py-6 max-w-[300px]'>
-                                        <span className='text-sm text-slate-400'>20 May</span>
-                                        <div className='flex gap-2'>
-                                            <Icon className='w-6 h-6 text-amber-500' icon="star" />
-                                            <Icon className='w-6 h-6 text-amber-500' icon="star" />
-                                            <Icon className='w-6 h-6 text-amber-500' icon="star" />
-                                            <Icon className='w-6 h-6 text-amber-500' icon="star" />
-                                            <Icon className='w-6 h-6 text-slate-400' icon="star" />
-                                        </div>
-                                        <span className='text-sm text-slate-400'>@DragonBall_190</span>
-                                        <p className='text-sm'>
-                                            Fast delivery and everything worked perfectly. Great seller, highly recommended for anyone looking to upgrade their game account!
-                                        </p>
-                                    </div>
-
+                                    {reviews.slice(0, 3).map((data, idx) => data.author === null
+                                        ? null
+                                        : <ReviewCard className={`${idx === 1 ? "hidden sm:flex lg:hidden xl:flex" : idx > 1 ? "hidden 2xl:flex" : ""} w-full`} key={data.review.id} review={data.review} author={data.author} />)
+                                    }
                                 </div>
                             </div>
                         </Card>

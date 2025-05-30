@@ -1,11 +1,11 @@
 'use server'
 import { createClient } from '@/utils/supabase/server';
 import { db } from '@/db';
-import { deals, posts, profiles } from '@/db/schema';
+import { deals, posts, profiles, reviews } from '@/db/schema';
 import { eq } from 'drizzle-orm';
 import ProfilePage from './profilePage';
 
-export default async function Page () {
+export default async function Page() {
     const supabase = await createClient()
 
     const { data } = await supabase.auth.getUser()
@@ -34,8 +34,10 @@ export default async function Page () {
         seller: deal.profiles!
     }))
 
+    const reviewsData = (await db.select().from(reviews).where(eq(reviews.receiverId, userData.id)).leftJoin(profiles, eq(profiles.id, reviews.authorId))).map(data => ({ review: data.reviews!, author: data.profiles! }))
+
 
     return (
-        <ProfilePage offers={offers} userData={userData} deals={dealsData} orders={ordersData} />
+        <ProfilePage reviews={reviewsData} offers={offers} userData={userData} deals={dealsData} orders={ordersData} />
     )
 }

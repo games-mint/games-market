@@ -27,6 +27,7 @@ export type Profile = {
     bio: string | null;
     avatarUrl: string | null;
     createdAt: Date;
+    rating: number | null
 }
 
 
@@ -45,4 +46,13 @@ export type FullDealDetails = {
     deal: Deal,
     offer: Offer,
     seller: Profile
+}
+
+export type Review = {
+    id: number;
+    authorId: string;
+    receiverId: string;
+    rating: number;
+    message: string | null;
+    createdAt: Date;
 }
